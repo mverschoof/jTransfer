@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>JTransfer</title>
+		<meta th:fragment="metas" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link th:fragment="metas" rel="shortcut icon" href="https://www.jcore.com/wp-content/uploads/2016/04/favicon.png" />
+
+		<link th:fragment="css_base" type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" media="all" />
+		<link th:fragment="css_base" type="text/css" rel="stylesheet" th:href="@{/css/font-awesome.min.css}" href="../css/font-awesome.min.css" media="all" />
+		<link th:fragment="css_base" type="text/css" rel="stylesheet" th:href="@{/css/main.css}" href="../css/main.css" />
+		<link th:fragment="css_base" type="text/css" rel="stylesheet" th:href="@{/css/header.css}" href="../css/header.css" />
+
+		<link th:fragment="css_forms" type="text/css" rel="stylesheet" th:href="@{/css/forms.css}" href="../css/forms.css" />
+
+		<link th:fragment="css_tables" type="text/css" rel="stylesheet" th:href="@{/css/tables.css}" href="../css/tables.css" />
+	</head>
+	<body>
+
+		<header th:fragment="header(page)">
+			<div class="logo">
+				<a th:href="@{/}"><img th:src="@{/images/logo.png}" src="../images/logo.png" alt="JCore logo" /></a>
+				<h1>JTransfer</h1>
+			</div>
+			<nav>
+				<ul>
+					<li><a th:href="@{/upload}" th:class="${page == 'upload' ? 'active' : ''}">Upload</a></li>
+					<li><a th:href="@{/uploads}" th:class="${page == 'uploads' ? 'active' : ''}">Mijn uploads</a></li>
+					<li><a th:href="@{/received}" th:class="${page == 'received' ? 'active' : ''}">Ontvangen uploads</a></li>
+					<li><a th:href="@{/help}" th:class="${page == 'help' ? 'active' : ''}">Help</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<div th:fragment="info" th:if="${messages != null and messages.length > 0}" class="messages">
+			<p th:each="message : ${messages}">
+				<span th:text="${message}">Message</span>
+			</p>
+		</div>
+		<div th:fragment="info" th:if="${errors != null and errors.length > 0}" class="errors">
+			<p th:each="error : ${errors}">
+				<span th:text="${error}">Error</span>
+			</p>
+		</div>
+		
+		<div th:fragment="comment(number)" class="dialog comment">
+			<div class="arrow-left"></div>
+			<p>
+				<i class="fa fa-info-circle fa-3x"></i>
+				<br />
+				<span th:if="${number == 1}">Klik hier of sleep bestanden naar deze pagina om bestanden te uploaden.</span>
+				<span th:if="${number == 2}">Meerdere ontvangers mogelijk. Hiervoor dienen de email adressen gescheiden te worden met een komma.</span>
+				<span th:if="${number == 3}">Voeg een bericht toe aan de upload voor de ontvanger.</span>
+				<span th:if="${number == 4}">Voeg een wachtwoord toe voor extra beveiliging.</span>
+				<span th:if="${number == 5}">Stel in na wanneer het bestand niet meer gedownload kan worden.</span>
+			</p>
+		</div>
+
+	</body>
+</html>

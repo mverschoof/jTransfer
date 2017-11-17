@@ -1,0 +1,101 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	color: #FFF;
+	line-height: 21px;
+}
+
+a {
+	display: inline-block;
+}
+
+a, a:hover, a:visited {
+	color: #676767;
+}
+
+a:hover {
+	color: #000;
+}
+
+ul, ul li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+/**
+ * Main page layout
+ */
+body div.container {
+	min-width: 900px;
+	height: 100%;
+	min-height: 100%;
+
+	background: url("../images/background.jpg") 0 0 no-repeat;
+	background-size: cover;
+}
+
+body div.container .messages,
+body div.container .errors {
+	margin: 0 auto 20px auto;
+	padding: 20px;
+	min-width: 350px;
+	max-width: 700px;
+	background: rgba(255, 255, 255, 0.8);
+	border: 3px solid;
+	text-align: center;
+}
+
+body div.container .messages {
+	border-color: #339933;
+	color: #339933;
+}
+
+body div.container .errors {
+	border-color: #CC3333;
+	color: #CC3333;
+}
+
+body div.container .messages p,
+body div.container .errors p {
+	margin: 0;
+}
+
+
+/**
+ * Main content
+ */
+main {
+	padding: 60px;
+	color: #676767;
+}
+
+main h2 {
+	margin: 0 0 0.5em 0;
+	font-size: 30px;
+	font-weight: 300;
+	line-height: 46px;
+	letter-spacing: -1px;
+}
+
+main .content {
+	padding: 20px;
+	background: #FFF;
+}
+
+main .content.small {
+	display: inline-block;
+}

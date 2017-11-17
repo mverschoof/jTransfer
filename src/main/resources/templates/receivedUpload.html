@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>JTransfer | Upload</title>
+
+		<meta th:replace="template :: metas" />
+
+		<link th:replace="template :: css_base" />
+		<link th:replace="template :: css_tables" />
+	</head>
+	<body>
+		<div class="container">
+			<header th:replace="template :: header('received')"></header>
+
+			<main>
+				<div th:replace="template :: info"></div>
+
+				<div class="content">
+					<h2>Upload</h2>
+					<table>
+						<tbody>
+							<tr>
+								<th>Upload</th>
+								<td th:text="${upload.uuid}">Upload UUID</td>
+							</tr>
+							<tr>
+								<th>Ge&uuml;pload door</th>
+								<td>
+									<a th:href="'mailto:' + ${upload.uploadedBy}" th:text="${upload.uploadedBy}">Uploader</a>
+								</td>
+							</tr>
+							<tr>
+								<th>Ge&uuml;pload op</th>
+								<td th:text="${#temporals.format(upload.uploadedOn, 'dd/MM/yyyy HH:mm')}">dd-mm-yyyy</td>
+							</tr>
+							<tr>
+								<th>Verloopt op</th>
+								<td th:text="${#temporals.format(upload.expiresOn, 'dd/MM/yyyy')}">dd-mm-yyyy</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<th:block th:unless="${upload.passwordProtected}">
+						<table class="topmargin">
+							<thead>
+								<tr>
+									<th>Bestand</th>
+									<th>Grootte</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="file : ${upload.files}">
+									<td>
+										<a th:href="@{'/download/' + ${upload.uuid} + '/' + ${file.uuid}}" th:text="${file.name}"
+											title="Download bestand">
+											Bestand
+										</a>
+									</td>
+									<td th:text="${file.getReadableFileSize()}"></td>
+									<td class="download">
+										<a th:href="@{'/download/' + ${upload.uuid} + '/' + ${file.uuid}}" title="Download bestand">
+											<i class="fa fa-download"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</th:block>
+					<th:block th:if="${upload.passwordProtected}">
+						<form class="password" th:action="@{/recieved/{uploadUuid}/password}" enctype="multipart/form-data" method="POST">
+							<input name="uploadUuid" type="hidden" th:value="${uploadUuid}" />
+							<fieldset>
+								<input id="password" name="password" type="text" placeholder="Wachtwoord (optioneel)" />
+							</fieldset>
+							<fieldset class="centered">
+								<button type="submit">Verstuur</button>
+							</fieldset>
+						</form>
+					</th:block>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>JTransfer | Nieuw bestand uploaden</title>
+
+		<meta th:replace="template :: metas" />
+
+		<link th:replace="template :: css_base" />
+		<link th:replace="template :: css_forms" />
+	</head>
+	<body>
+		<div class="container">
+			<header th:replace="template :: header('upload')"></header>
+
+			<main>
+				<div th:replace="template :: info"></div>
+				
+				<div class="content small">
+					<form class="upload" th:action="@{/upload}" enctype="multipart/form-data" method="POST">
+						<h2>Upload nieuwe bestanden</h2>
+						<input name="uploadUuid" type="hidden" th:value="${uploadUuid}" />
+						<fieldset>
+							<label for="file"><i class="fa fa-plus-circle"></i><span>Voeg bestanden toe</span></label>
+							<input id="file" name="file" type="file" class="hidden" />
+							<div th:replace="template :: comment(1)"></div>
+						</fieldset>
+						<input type="submit" />
+					</form>
+					
+					<form class="settings" th:action="@{/upload/settings}" enctype="multipart/form-data" method="POST">
+						<input name="uploadUuid" type="hidden" th:value="${uploadUuid}" />
+						<fieldset>
+							<input id="recipients" name="recipients" type="text" placeholder="Email naar" />
+							<div th:replace="template :: comment(2)"></div>
+						</fieldset>
+						<fieldset>
+							<textarea id="message" name="message" placeholder="Bericht (optioneel)"></textarea>
+							<div th:replace="template :: comment(3)"></div>
+						</fieldset>
+						<fieldset>
+							<input id="password" name="password" type="text" placeholder="Wachtwoord (optioneel)" />
+							<div th:replace="template :: comment(4)"></div>
+						</fieldset>
+<!--/* 
+						<fieldset>
+							<select id="expiration" name="expiration">
+								<option value="day">1 dag</option>
+								<option value="week" selected="selected">1 week</option>
+								<option value="month">1 maand</option>
+							</select>
+							<div th:replace="template :: comment(5)"></div>
+						</fieldset>
+ */-->
+						<fieldset class="centered">
+							<button type="submit">Verstuur</button>
+						</fieldset>
+					</form>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

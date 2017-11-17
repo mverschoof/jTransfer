@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>JTransfer | Probleem opgetreden</title>
+
+		<meta th:replace="template :: metas" />
+
+		<link th:replace="template :: css_base" />
+	</head>
+	<body>
+		<div class="container">
+			<header th:replace="template :: header('')"></header>
+
+			<main>
+				<div th:replace="template :: info"></div>
+
+				<div class="content">
+					<h2 th:text="${errorMsg}">An error has occurred</h2>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>JTransfer | Ontvangen uploads</title>
+
+		<meta th:replace="template :: metas" />
+
+		<link th:replace="template :: css_base" />
+		<link th:replace="template :: css_tables" />
+	</head>
+	<body>
+		<div class="container">
+			<header th:replace="template :: header('received')"></header>
+
+			<main>
+				<div th:replace="template :: info"></div>
+
+				<div class="content">
+					<h2>Ontvangen uploads</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Upload</th>
+								<th>Ge&uuml;pload door</th>
+								<th>Ge&uuml;pload op</th>
+								<th>Verloopt op</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="upload : ${uploads}">
+								<tr>
+									<th:block th:if="${!upload.isExpired()}">
+										<td>
+											<a th:href="@{'/received/' + ${upload.uuid}}" th:text="${upload.uuid}">12345</a>
+										</td>
+										<td>
+											<a th:href="'mailto:' + ${upload.uploadedBy}" th:text="${upload.uploadedBy}">
+												Uploader
+											</a>
+										</td>
+									</th:block>
+									<th:block th:if="${upload.isExpired()}">
+										<td>
+											<span th:text="${upload.uuid}">12345</span>
+										</td>
+										<td>
+											<span th:text="${upload.uploadedBy}">Uploader</span>
+										</td>
+									</th:block>
+									<td th:text="${#temporals.format(upload.uploadedOn, 'dd/MM/yyyy HH:mm')}"></td>
+									<td th:text="${#temporals.format(upload.expiresOn, 'dd/MM/yyyy')}"></td>
+									<td class="download">
+										<a th:if="${!upload.isExpired()}" th:href="@{'/download/' + ${upload.uuid}}" 
+											title="Download bestanden">
+											<i class="fa fa-download"></i>
+										</a>
+									</td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

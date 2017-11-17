@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>JTransfer | Mijn uploads</title>
+
+		<meta th:replace="template :: metas" />
+
+		<link th:replace="template :: css_base" />
+		<link th:replace="template :: css_tables" />
+	</head>
+	<body>
+		<div class="container">
+			<header th:replace="template :: header('uploads')"></header>
+
+			<main>
+				<div th:replace="template :: info"></div>
+
+				<div class="content">
+					<h2>Mijn uploads</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Upload</th>
+								<th>Ontvangers</th>
+								<th>Ge&uuml;pload op</th>
+								<th>Verloopt op</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="upload : ${uploads}">
+								<tr>
+									<th:block th:if="${!upload.isExpired()}">
+										<td>
+											<a th:href="@{'/upload/' + ${upload.uuid}}" th:text="${upload.uuid}">12345</a>
+										</td>
+										<td>
+											<th:block th:if="${upload.recipientsAsArray != null}">
+												<a th:each="recipient : ${upload.recipientsAsArray}" 
+													th:href="'mailto:' + ${recipient}" th:text="${recipient}">
+													Ontvanger
+												</a>
+											</th:block>
+										</td>
+									</th:block>
+									<th:block th:if="${upload.isExpired()}">
+										<td>
+											<span th:text="${upload.uuid}">12345</span>
+										</td>
+										<td>
+											<th:block th:if="${upload.recipientsAsArray != null}">
+												<div th:each="recipient : ${upload.recipientsAsArray}" th:text="${recipient}">
+													Ontvanger
+												</div>
+											</th:block>
+										</td>
+									</th:block>
+									<td th:text="${#temporals.format(upload.uploadedOn, 'dd/MM/yyyy HH:mm')}"></td>
+									<td th:text="${#temporals.format(upload.expiresOn, 'dd/MM/yyyy')}"></td>
+									<td class="download">
+										<th:block th:unless="${upload.expired}">
+											<a th:unless="${upload.passwordProtected}" th:href="@{'/download/' + ${upload.uuid}}" 
+												title="Download bestanden als zip">
+												<i class="fa fa-download"></i>
+											</a>
+											<form th:if="${upload.passwordProtected}" th:action="@{'/download/' + ${upload.uuid}}" 
+												enctype="multipart/form-data" method="POST">
+												<input name="password" type="password" placeholder="password" />
+												<button type="submit" title="Download bestanden als zip">
+													<i class="fa fa-download"></i>
+												</button>
+											</form>
+										</th:block>
+									</td>
+									<td class="delete">
+										<a th:href="@{'/delete/' + ${upload.uuid}}" title="Verwijderen">
+											<i class="fa fa-times"></i>
+										</a>
+									</td>
+								</tr>
+<!--/* 
+								<tr th:each="file : ${upload.files}">
+									<td th:text="${file.name}" colspan="3"></td>
+									<td class="right" th:text="${file.getReadableFileSize()}"></td>
+								</tr>
+ */-->
+							</th:block>
+						</tbody>
+					</table>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

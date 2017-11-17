@@ -1,0 +1,191 @@
+/**
+ * Forms
+ */
+main form {
+	
+}
+
+main form h2 {
+	margin: 0;
+}
+
+main form fieldset {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+main form fieldset input.hidden {
+	/* display: none; */
+}
+
+main form fieldset .dialog {
+	position: absolute;
+	top: 50%;
+	left: 365px;
+	display: block;
+	margin: 0;
+	padding: 0 0 0 10px;
+	width: 200px;
+	text-align: center;
+	background: none;
+	border: none;
+
+	opacity: 0;
+	transition: opacity 0.2s linear;
+	transform: translateY(-50%);
+}
+
+main form fieldset label:hover ~ .dialog,
+main form fieldset textarea:hover ~ .dialog,
+main form fieldset select:hover ~ .dialog,
+main form fieldset input:hover ~ .dialog {
+	opacity: 1;
+}
+
+main form fieldset .dialog div.arrow-left {
+	position: absolute;
+	top: 50%;
+	left: 0px;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right:10px solid rgba(0, 0, 0, 0.7);
+
+    transform: translateY(-50%);
+}
+
+main form fieldset .dialog p {
+	margin: 0;
+	padding: 10px;
+	font-size: 0.8em;
+	text-align: center;
+	color: #FFF;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+
+/* File upload form */
+main form.upload fieldset label {
+	display: block;
+	line-height: 130px;
+	font-size: 20px;
+}
+
+main form.upload fieldset label:hover {
+	cursor: pointer;
+}
+
+main form.upload fieldset label span {
+	opacity: 0.75;
+	transition: opacity 0.2s linear;
+}
+
+main form.upload fieldset label:hover span {
+	opacity: 1;
+}
+
+main form.upload fieldset label i.fa {
+	margin-right: 10px;
+	font-size: 40px;
+	line-height: 40px;
+	color: #C2D452;	
+	vertical-align: middle;
+	transition: color 0.2s linear;
+}
+
+main form.upload fieldset label:hover i.fa {
+	color: #B2C442;
+}
+
+
+/* File settings form */
+main form.settings fieldset {
+	border-top: 1px solid #AAA;
+}
+
+main form.settings fieldset.centered {
+	text-align: center;
+}
+
+main form.settings fieldset input,
+main form.settings fieldset textarea,
+main form.settings fieldset select {
+	height: 40px;
+	border: none;
+	color: #333;
+}
+
+main form.settings fieldset input, 
+main form.settings fieldset textarea {
+	display: block;
+	padding: 0 10px;
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+}
+
+main form.settings fieldset textarea {
+	padding-top: 11px;
+	padding-bottom: 11px;
+	height: 80px;
+}
+
+main form.settings fieldset select {
+	padding-left: 5px;
+	padding-right: 10px;
+}
+
+main form.settings fieldset input:focus,
+main form.settings fieldset textarea:focus,
+main form.settings fieldset select:focus,
+main form.settings fieldset button:focus {
+	outline: none;
+}
+
+main form.settings fieldset button,
+main form.zip fieldset button,
+main a.ziplink {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 0 30px;
+	font-family: 'Open sans', sans-serif;
+	font-size: 16px;
+	color: #FFF;
+	line-height: 36px;
+	border: none;
+	background-color: #56B0D9;
+	transition: background-color 0.2s linear;
+}
+
+main form.zip fieldset input {
+	padding: 8px 15px;
+}
+
+main form.zip fieldset button {
+	margin-top: 10px;
+}
+
+main form.zip fieldset input,
+main form.zip fieldset button,
+main a.ziplink {
+	width: 300px;
+}
+
+main form.settings fieldset button:hover,
+main form.zip fieldset button:hover,
+main a.ziplink:hover {
+	cursor: pointer;
+	background-color: #3690B9;
+}
+
+main a.ziplink {
+	text-decoration: none;
+}
+
+
+main div.downloadAll {
+	margin-top: 2em;
+	text-align: center;
+}
